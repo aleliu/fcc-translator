@@ -38,7 +38,7 @@ suite('Functional Tests', () => {
             .send({locale: "americant-to-british"})
             .end((err, res) => {
                 assert.equal(res.status, 200);
-                assert.deepEqual(res.body, {error: "No text to translate"});
+                assert.deepEqual(res.body, {error: "Required field(s) missing"});
                 done();
             });
     })
