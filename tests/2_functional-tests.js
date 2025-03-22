@@ -73,6 +73,7 @@ suite('Functional Tests', () => {
                 assert.equal(res.status, 200);
                 assert.equal(res.body.text, "I ate yoghurt for breakfast.");
                 assert.equal(res.body.translation, "Everything looks good to me!");
+                done();
             });
     })
 });
