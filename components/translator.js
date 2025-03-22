@@ -31,8 +31,14 @@ class Translator {
             dictionary = {
                 ...americanOnly,
                 ...americanToBritishSpelling,
-                ...americanToBritishTitles,
-                ":": "."
+                ...americanToBritishTitles
+            }
+            if ( translation.includes(":") ) {
+                if ( highlight ) {
+                    translation = translation.replace(/(\d{1,2})\:(\d{2})/gi, this.highlightText("$1\.$2"));
+                } else {
+                    translation = translation.replace(/(\d{1,2})\:(\d{2})/gi, "$1\.$2");
+                }
             }
         } else {
             dictionary = {
@@ -41,7 +47,11 @@ class Translator {
                 ...this.invertObject(americanToBritishTitles),
             }
             if ( translation.includes(".") ) {
-                translation = translation.replace(/(\d)\.(\d)/gi, "$1\:$2");
+                if ( highlight ) {
+                    translation = translation.replace(/(\d{1,2})\.(\d{2})/gi, this.highlightText("$1\:$2"));
+                } else { 
+                    translation = translation.replace(/(\d{1,2})\.(\d{2})/gi, "$1\:$2");
+                }
             }
         }
 
@@ -50,7 +60,7 @@ class Translator {
             regex = new RegExp(`([^A-Za-z\-]|^)${regexKey}([^A-Za-z\-])`, 'gi');
             
             if (highlight) {
-                translation = translation.replace(regex , `$1${this.highlightText(dictionary[key], `highlight`)}$2`);
+                translation = translation.replace(regex , `$1${this.highlightText(dictionary[key])}$2`);
             } else {
                 translation = translation.replace(regex , `$1${dictionary[key]}$2`);
             }
