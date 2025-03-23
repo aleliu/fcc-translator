@@ -34,11 +34,11 @@ suite('Unit Tests', () => {
         done();
     })
     test("Translate No Mr. Bond, I expect you to die. to British English", (done) => {
-        assert.deepEqual(translator.translate("No Mr. Bond, I expect you to die.", "american-to-british", false), { text: "No Mr. Bond, I expect you to die.", translation: "No mr Bond, I expect you to die." });
+        assert.deepEqual(translator.translate("No Mr. Bond, I expect you to die.", "american-to-british", false), { text: "No Mr. Bond, I expect you to die.", translation: "No Mr Bond, I expect you to die." });
         done();
     })
     test("Translate Dr. Grosh will see you now. to British English", (done) => {
-        assert.deepEqual(translator.translate("Dr. Grosh will see you now.", "american-to-british", false), { text: "Dr. Grosh will see you now.", translation: "dr Grosh will see you now." });
+        assert.deepEqual(translator.translate("Dr. Grosh will see you now.", "american-to-british", false), { text: "Dr. Grosh will see you now.", translation: "Dr Grosh will see you now." });
         done();
     })
     test("Translate Lunch is at 12:15 today. to British English", (done) => {
@@ -74,11 +74,11 @@ suite('Unit Tests', () => {
         done();
     })
     test("Translate Have you met Mrs Kalyani? to American English", (done) => {
-        assert.deepEqual(translator.translate("Have you met Mrs Kalyani?", "british-to-american", false), { text: "Have you met Mrs Kalyani?", translation: "Have you met mrs. Kalyani?" });
+        assert.deepEqual(translator.translate("Have you met Mrs Kalyani?", "british-to-american", false), { text: "Have you met Mrs Kalyani?", translation: "Have you met Mrs. Kalyani?" });
         done();
     })
     test("Translate Prof Joyner of King's College, London. to American English", (done) => {
-        assert.deepEqual(translator.translate("Prof Joyner of King's College, London.", "british-to-american", false), { text: "Prof Joyner of King's College, London.", translation: "prof. Joyner of King's College, London." });
+        assert.deepEqual(translator.translate("Prof Joyner of King's College, London.", "british-to-american", false), { text: "Prof Joyner of King's College, London.", translation: "Prof. Joyner of King's College, London." });
         done();
     })
     test("Translate Tea time is usually around 4 or 4.30. to American English", (done) => {
