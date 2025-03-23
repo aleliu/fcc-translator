@@ -17,7 +17,7 @@ class Translator {
     }
 
     translate(text, type, highlight=true){
-        let dictionary, regex, regexKey;
+        let dictionary, regex, regexKey, replacement, translationLower;
         let translation = text;
         if ( text == undefined || type == undefined || type == '' ) {
             return { error: "Required field(s) missing" };
@@ -26,7 +26,8 @@ class Translator {
         } else if ( type != 'american-to-british' && type != 'british-to-american' ) {
             return { error: "Invalid value for locale field" };
         }
-        
+        translationLower = translation.toLowerCase();
+
         if ( type == 'american-to-british' ) {
             dictionary = {
                 ...americanOnly,
@@ -56,13 +57,20 @@ class Translator {
         }
 
         for (let key in dictionary){
-            regexKey = key.replace(/\./g, "\\.");
-            regex = new RegExp(`([^A-Za-z\-]|^)${regexKey}([^A-Za-z\-])`, 'gi');
-            
-            if (highlight) {
-                translation = translation.replace(regex , `$1${this.highlightText(dictionary[key])}$2`);
-            } else {
-                translation = translation.replace(regex , `$1${dictionary[key]}$2`);
+            if (translationLower.includes(key)) {
+                if (["mr", "mrs", "ms", "mx", "dr", "prof"].includes(key.replace(/\./g, ""))) {
+                    replacement = dictionary[key].charAt(0).toUpperCase() + dictionary[key].slice(1);
+                }
+                else {
+                    replacement = dictionary[key];
+                }
+                regexKey = key.replace(/\./g, "\\.");
+                regex = new RegExp(`([^A-Za-z\-]|^)${regexKey}([^A-Za-z\-])`, 'gi');
+                if (highlight) {
+                    translation = translation.replace(regex , `$1${this.highlightText(replacement)}$2`);
+                } else {
+                    translation = translation.replace(regex , `$1${replacement}$2`);
+                }
             }
         }
 
